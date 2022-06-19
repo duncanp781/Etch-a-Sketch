@@ -1,18 +1,59 @@
 const grid = document.querySelector('#grid');
 let rows = document.querySelectorAll('.row');
 let boxes = document.querySelectorAll('.box');
-makeGrid(16);
+let style = 'black';
+let currentSize = 16;
+makeGrid(currentSize);
+
 const gridButton = document.querySelector('#gridButton');
 gridButton.addEventListener('click', () =>{
   let newSize = prompt('How big would you like the new grid to be?');
   makeGrid(newSize);
 });
 
+const clearButton = document.querySelector('#clearGrid');
+clearButton.addEventListener('click', () => makeGrid());
 
+let styleButtons = document.querySelectorAll('#styles button');
+styleButtons.forEach(btn =>{
+  btn.addEventListener('click', setStyle);
+})
+
+
+function setStyle(e){
+  let btn = e.target;
+  style = btn.getAttribute('id');
+}
 
 function onHover(e){
   let box = e.target;
-  box.classList.add('hovered');
+  let color;
+  switch (style){
+    case 'black':
+      box.style.opacity = '1';
+      color = 'black';
+    break;
+    case 'rainbow':
+      box.style.opacity = '1';
+      let rc1 = randNum(255);
+      let rc2 = randNum(255);
+      let rc3 = randNum(255);
+      color = `rgb(${rc1}, ${rc2}, ${rc3})`;
+    break;
+    case 'shading':
+      if(box.style.backgroundColor != 'black'){
+        box.style.opacity = '0';
+      }
+      let currentOpacity = parseFloat(box.style.opacity);
+      box.style.opacity = String(Math.min(currentOpacity + 0.1, 1));
+      color = 'black';
+    break;
+    case 'eraser':
+      box.style.opacity = '0';
+      box.backgroundColor = 'white';
+    break;
+  }
+  box.style.backgroundColor = color;
 }
 
 function endHover(e){
@@ -20,7 +61,9 @@ function endHover(e){
   box.classList.remove('hovered');
 }
 
-function makeGrid(sideLength){
+function makeGrid(sideLength = currentSize){
+  console.log(sideLength);
+  currentSize = sideLength;
   let rows = document.querySelectorAll('.row');
   let boxes = document.querySelectorAll('.box');
   rows.forEach(box => box.remove());
@@ -33,6 +76,7 @@ function makeGrid(sideLength){
         const box = document.createElement('div');
         box.classList.add(`${i}`);
         box.classList.add(`${j}`);
+        box.style.opacity = '0';
         box.classList.add(`box`);
         box.addEventListener('mouseover', onHover);
         row.appendChild(box);
@@ -41,3 +85,6 @@ function makeGrid(sideLength){
   }
 }
 
+function randNum(max){
+  return Math.round(Math.random()*max);
+}
