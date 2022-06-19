@@ -1,0 +1,26 @@
+
+
+
+#grid{
+  display: flex;
+  flex-direction:column;
+  border-style: solid;
+  border-color: black;
+  width: 960px;
+  height:960px;
+}
+
+
+
+.row{
+  display:flex;
+  flex: 1;
+  width: 960px;
+}
+
+.box{
+  flex: 1 1 0;
+}
+.hovered{
+  background-color:black;
+}
