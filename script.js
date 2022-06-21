@@ -1,7 +1,11 @@
 const grid = document.querySelector('#grid');
 let rows = document.querySelectorAll('.row');
 let boxes = document.querySelectorAll('.box');
+
 let style = 'black';
+const styleText = document.querySelector('#currStyle');
+styleText.textContent = `Current Style: ${style}`;
+
 let currentSize = 16;
 makeGrid(currentSize);
 
@@ -14,7 +18,7 @@ gridButton.addEventListener('click', () =>{
 const clearButton = document.querySelector('#clearGrid');
 clearButton.addEventListener('click', () => makeGrid());
 
-let styleButtons = document.querySelectorAll('#styles button');
+const styleButtons = document.querySelectorAll('#styles button');
 styleButtons.forEach(btn =>{
   btn.addEventListener('click', setStyle);
 })
@@ -23,6 +27,7 @@ styleButtons.forEach(btn =>{
 function setStyle(e){
   let btn = e.target;
   style = btn.getAttribute('id');
+  styleText.textContent = `Current Style: ${style}`;
 }
 
 function onHover(e){
@@ -83,6 +88,8 @@ function makeGrid(sideLength = currentSize){
       }
     grid.appendChild(row);
   }
+  const gridText = document.querySelector('#gridSize');
+  gridText.textContent = `Current Size: ${currentSize} x ${currentSize}`
 }
 
 function randNum(max){

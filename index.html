@@ -9,14 +9,24 @@
   <link rel = 'stylesheet' href = 'style.css'>
 </head>
 <body>
-  <button id="gridButton">Change Grid Size</button>
-  <button id="clearGrid">Clear Grid</button>
+
+  <div id = 'editor'>
   <div id="grid"></div>
-  <div id = 'styles'>
-    <button id = 'black'>Black</button>
-    <button id = 'rainbow'>Rainbow</button>
-    <button id = 'shading'>Shade</button>
-    <button id = 'eraser'>Erase</button>
+    <div id = 'sidepanel'>
+      <div class = 'top-buttons'>
+        <span id = 'gridSize'></span> 
+        <button id="gridButton">Change Grid Size</button>
+        <button id="clearGrid">Clear Grid</button>
+      </div>
+      <div id = 'styles'>
+        <span id = 'currStyle'></span>
+        <button id = 'black'>Black</button>
+        <button id = 'rainbow'>Rainbow</button>
+        <button id = 'shading'>Shade</button>
+        <button id = 'eraser'>Erase</button>
+      </div>
+    </div>
   </div>
+  
 </body>
 </html>
